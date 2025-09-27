@@ -79,23 +79,32 @@ class OutputFormat(str, Enum):
     TEXT = "text"
     DOCTAGS = "doctags"
 
+def _case_variants(exts: list[str]) -> list[str]:
+    """Return both lower and upper case variants for each extension."""
+    
+    out: set[str] = set()
+    for e in exts:
+        el = e.lower()
+        out.add(el)
+        out.add(el.upper())
+    return sorted(out)
 
 FormatToExtensions: dict[InputFormat, list[str]] = {
-    InputFormat.DOCX: ["docx", "dotx", "docm", "dotm"],
-    InputFormat.PPTX: ["pptx", "potx", "ppsx", "pptm", "potm", "ppsm"],
-    InputFormat.PDF: ["pdf"],
-    InputFormat.MD: ["md"],
-    InputFormat.HTML: ["html", "htm", "xhtml"],
-    InputFormat.XML_JATS: ["xml", "nxml"],
-    InputFormat.IMAGE: ["jpg", "jpeg", "png", "tif", "tiff", "bmp", "webp"],
-    InputFormat.ASCIIDOC: ["adoc", "asciidoc", "asc"],
-    InputFormat.CSV: ["csv"],
-    InputFormat.XLSX: ["xlsx", "xlsm"],
-    InputFormat.XML_USPTO: ["xml", "txt"],
-    InputFormat.METS_GBS: ["tar.gz"],
-    InputFormat.JSON_DOCLING: ["json"],
-    InputFormat.AUDIO: ["wav", "mp3"],
-    InputFormat.VTT: ["vtt"],
+    InputFormat.DOCX: _case_variants(["docx", "dotx", "docm", "dotm"]),
+    InputFormat.PPTX: _case_variants(["pptx", "potx", "ppsx", "pptm", "potm", "ppsm"]),
+    InputFormat.PDF: _case_variants(["pdf"]),
+    InputFormat.MD: _case_variants(["md"]),
+    InputFormat.HTML: _case_variants(["html", "htm", "xhtml"]),
+    InputFormat.XML_JATS: _case_variants(["xml", "nxml"]),
+    InputFormat.IMAGE: _case_variants(["jpg", "jpeg", "png", "tif", "tiff", "bmp", "webp"]),
+    InputFormat.ASCIIDOC: _case_variants(["adoc", "asciidoc", "asc"]),
+    InputFormat.CSV: _case_variants(["csv"]),
+    InputFormat.XLSX: _case_variants(["xlsx", "xlsm"]),
+    InputFormat.XML_USPTO: _case_variants(["xml", "txt"]),
+    InputFormat.METS_GBS: _case_variants(["tar.gz"]),
+    InputFormat.JSON_DOCLING: _case_variants(["json"]),
+    InputFormat.AUDIO: _case_variants(["wav", "mp3"]),
+    InputFormat.VTT: _case_variants(["vtt"]),
 }
 
 FormatToMimeType: dict[InputFormat, list[str]] = {
